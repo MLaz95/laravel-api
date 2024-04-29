@@ -10,7 +10,8 @@ class ProjectController extends Controller
 {
     public function index() {
 
-        $projects = Project::all();
+        // eager loading with type and tech, 4 projects per page
+        $projects = Project::with(['type', 'technologies'])->paginate(4);
 
         return response()->json([
             "success" => true,
