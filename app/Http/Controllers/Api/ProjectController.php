@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+    // returns json of all projects four at a time
     public function index() {
 
         // eager loading with type and tech, 4 projects per page
@@ -18,5 +19,15 @@ class ProjectController extends Controller
             "results" => $projects
         ]);
 
+    }
+
+    // returns json of single project
+    public function show($id){
+        $project = Project::with(['type', 'technologies'])->where('id', $id)->first();
+
+        return response()->json([
+            "success" => true,
+            "project" => $project
+        ]);
     }
 }
