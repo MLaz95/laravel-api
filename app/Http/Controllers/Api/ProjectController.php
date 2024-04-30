@@ -22,12 +22,20 @@ class ProjectController extends Controller
     }
 
     // returns json of single project
-    public function show($id){
-        $project = Project::with(['type', 'technologies'])->where('id', $id)->first();
+    public function show($slug){
+        $project = Project::with(['type', 'technologies'])->where('slug', $slug)->first();
 
-        return response()->json([
-            "success" => true,
-            "project" => $project
-        ]);
+        if($project) {
+            return response()->json([
+                "success" => true,
+                "project" => $project
+            ]); 
+        } else {
+            return response()->json([
+                "success" => false,
+                "error" => "Post not found"
+            ]);
+        }
+
     }
 }
