@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 USE App\Http\Requests\StoreProjectRequest;
 use App\Models\Technology;
 use App\Models\Type;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -47,6 +48,7 @@ class ProjectController extends Controller
         }
 
         $newProject->fill($request->all());
+        $newProject->slug = Str::slug($newProject->name);
         $newProject->save();
 
         // we are attaching the project id to the tech id and adding that pair to the pivot table
@@ -85,6 +87,7 @@ class ProjectController extends Controller
             $project->cover = $path;
         }
         $project->update($request->all());
+        $project->slug = Str::slug($request->name);
 
         // sync() looks at all the ids I'm trying to add to the pivot table, adds those, and removes any others
         $project->technologies()->sync($request->technologies);
