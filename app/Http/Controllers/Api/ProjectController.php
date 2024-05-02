@@ -33,7 +33,7 @@ class ProjectController extends Controller
         } else {
             return response()->json([
                 "success" => false,
-                "error" => "Post not found"
+                "error" => "Project not found"
             ]);
         }
 
