@@ -38,4 +38,15 @@ class ProjectController extends Controller
         }
 
     }
+
+    public function search($query){
+        $projects = Project::with(['type', 'technologies']);
+        $filtered = $projects->where('name', 'LIKE', '%' . $query . '%')->paginate(4);
+
+        return response()->json([
+            "success" => true,
+            "results" => $filtered
+        ]);
+
+    }
 }
