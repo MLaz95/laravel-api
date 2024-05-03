@@ -34,7 +34,7 @@ class LeadController extends Controller
         }
 
         $newLead = new Lead();
-        $newLead->fill($request->all);
+        $newLead->fill($request->all());
         $newLead->save();
 
 
