@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('leads', function (Blueprint $table) {
             $table->id();
+
+            $table->string('name');
+            $table->string('address');
+            $table->text('message');
+
             $table->timestamps();
         });
     }
